@@ -71,24 +71,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<MyViewHolder> {
         Glide.with(mContext).load(uri).into(holder.imageView);
 
         //设置ImageView的点击事件
-//        holder.imageView.setOnClickListener(new View.OnClickListener() {
-////            @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-////            @Override
-////            public void onClick(View v) {
-////
-////                Toast.makeText(mContext,position+"",Toast.LENGTH_SHORT).show();
-////                v.getContext().startActivity(
-////                        new Intent(v.getContext(),DetailActivity.class),
-////                        ActivityOptions.makeSceneTransitionAnimation((Activity) v.getContext(), v, "sharedView").toBundle());
-//////                Intent intent = new Intent(mContext, DetailActivity.class);
-//////
-//////                intent.putExtra("uri",mDatas.get(position));
-//////
-//////                mContext.startActivity(intent, ActivityOptions.makeSceneTransitionAnimation((Activity) mContext
-//////                        ,holder.imageView,"share").toBundle());
-////
-////            }
-////        });
         holder.imageView.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
             @Override
