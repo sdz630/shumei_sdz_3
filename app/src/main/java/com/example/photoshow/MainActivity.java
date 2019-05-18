@@ -5,6 +5,7 @@ import android.os.Message;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
@@ -30,25 +31,27 @@ public class MainActivity extends AppCompatActivity {
     private  Handler mHandler;
     private List<Result> resultList = new ArrayList<>();
     private List<String> Images ;
-    private List<Integer> mImageHeights = new ArrayList<>();
     private int count = 1;
     TextView responseText;
+
+
 
     @SuppressWarnings("all")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        responseText = (TextView)findViewById(R.id.response_text);
-        Log.i("sdz", "Step1 OK!");
-
+        //初始化
         InitUI();
         InitData();
 
         //给RecyclerView设置布局
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false);
-        mRecyclerView.setLayoutManager(new StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL));
+//        GridLayoutManager gridLayoutManager = new GridLayoutManager(this, GridLayoutManager.VERTICAL);
+        //item跳动
+        StaggeredGridLayoutManager manager = new StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL);
+        manager.setGapStrategy(StaggeredGridLayoutManager.GAP_HANDLING_NONE);
+        mRecyclerView.setLayoutManager(manager);
         //创建适配器
         myAdapter = new RecyclerViewAdapter( Images,MainActivity.this);
         //给RecyclerView绑定适配器
@@ -125,21 +128,16 @@ public class MainActivity extends AppCompatActivity {
                     }).start();
                 }
             }
-
-
-
         });
-
     }
-
 
     private void parseJSONWithGSON(String jsonData) {
 
         Gson gson = new Gson();
         Httphelper httphelper = gson.fromJson(jsonData,Httphelper.class);
-        resultList = httphelper.results;
+        resultList = httphelper.getResults();
 
-        for (Result result : httphelper.results) {
+        for (Result result : resultList) {
             String url = result.getUrl();
             Images.add(url);
             Log.i(TAG,"URL is "+ url);
@@ -186,8 +184,5 @@ public class MainActivity extends AppCompatActivity {
         }
         return false;
     }
-
-
-
 
 }

@@ -4,24 +4,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <Button
-        android:id="@+id/send_request"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Send request"
-        android:textAllCaps="false"/>
-
-    <TextView
-        android:id="@+id/response_text"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Hi!"/>
-
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
-
-
 
 </LinearLayout>
